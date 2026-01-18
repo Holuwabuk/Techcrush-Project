@@ -1,4 +1,4 @@
-//SPDX-License-Identifier:MIT
+//SPDX-License-Identifier: MIT
 pragma solidity ^0.8.30;
 import {NexusNFT} from "../src/NexusNFT.sol";
 import {ReentrancyGuard} from "../lib/openzeppelin-contracts/contracts/utils/ReentrancyGuard.sol";
@@ -14,9 +14,9 @@ contract NexusMarketPlace is ReentrancyGuard {
 
     NexusNFT public myNFT;
 
-    mapping(uint256 => Listing) public listings;
-    mapping(address => bool) public hasActiveListing;
-    mapping(address => uint256) public sellerActiveTokenId;
+    mapping(uint256 => Listing) public listings;     // The main storage: "For NFT #5, here's all the listing details", You can look up any token ID to see if it's listed and get its info
+    mapping(address => bool) public hasActiveListing;  // Does this address currently have an active listing?" Prevents sellers from listing multiple NFTs simultaneously (design choice)
+    mapping(address => uint256) public sellerActiveTokenId; // Which specific NFT does this seller have listed?
 
 constructor(address _nftContract) {
     myNFT = NexusNFT(_nftContract);
